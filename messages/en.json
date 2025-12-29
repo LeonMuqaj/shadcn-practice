@@ -1,0 +1,131 @@
+{
+  "hello": "Hello",
+  "save": "Save",
+  "cancel": "Cancel",
+  "auth": {
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "toggleTheme": "Toggle theme"
+  },
+  "sidebar": {
+    "brand": "Leoni Dev",
+    "application": "Application",
+    "projects": "Projects",
+    "nestedItems": "Nested Items",
+    "collapsableGroup": "Collapsable Group",
+    "addProject": "Add Project",
+    "seeAllProjects": "See All Projects",
+    "addAProject": "Add a Project",
+    "addCategory": "Add Category"
+  },
+  "menu": {
+    "home": "Home",
+    "users": "Users",
+    "inbox": "Inbox",
+    "calendar": "Calendar",
+    "search": "Search",
+    "settings": "Settings",
+    "myAccount": "My Account",
+    "profile": "Profile",
+    "logOut": "Log out",
+    "account": "Account",
+    "signOut": "Sign out"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "dashboard": {
+    "latestTransactions": "Latest Transactions",
+    "popularContent": "Popular Content",
+    "todoList": "Todo List",
+    "totalRevenue": "Total revenue!",
+    "pickADate": "Pick a date",
+    "totalVisitors": "Total Visitors!",
+     "browserUsage": "Browser Usage!",
+    "trendingBrowser": "Trending up by 5.2% this month",
+    "showingTotal": "Showing total visitors for the last 6 months"
+  },
+  "chart": {
+    "desktop": "Desktop",
+    "mobile": "Mobile"
+  },
+  "form": {
+    "editUser": "Edit User",
+    "username": "Username",
+    "email": "Email",
+    "phone": "Phone",
+    "location": "Location",
+    "role": "Role",
+    "saveChanges": "Save Changes",
+    "admin": "Admin",
+    "user": "User",
+    "onlyVerifiedUsersCanBeAdmin": "Only verified users can be admin.",
+    "invalidEmail": "Invalid email address!"
+  },
+  "language": {
+    "english": "English",
+    "albanian": "Albanian",
+    "switchLanguage": "Switch Language"
+  },
+  "users": {
+    "title": "Users",
+    "description": "Manage and view all users in the system",
+    "addUser": "Add User",
+    "totalUsers": "Total Users",
+    "activeUsers": "Active Users",
+    "admins": "Admins",
+    "allUsers": "All Users",
+    "showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "usersText": "users",
+    "user": "User",
+    "contact": "Contact",
+    "location": "Location",
+    "role": "Role",
+    "status": "Status",
+    "actions": "Actions",
+    "viewProfile": "View Profile"
+  },
+  "profile": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "userBadges": "User Badges",
+    "verifiedUser": "Verified User",
+    "verifiedDesc": "This user has been verified by the admin",
+    "admin": "Admin",
+    "adminDesc": "Admin users have access to all features and can manage users.",
+    "awarded": "Awarded",
+    "awardedDesc": "This user has been awarded for their contributions.",
+    "popular": "Popular",
+    "popularDesc": "This user has been popular in the community.",
+    "userInfo": "User information",
+    "editUser": "Edit User",
+    "completion": "Profile completion",
+    "username": "Username:",
+    "email": "Email:",
+    "phone": "Phone:",
+    "location": "Location:",
+    "roleLabel": "Role:",
+    "joinedOn": "Joined on",
+    "recentTransactions": "Recent Transactions",
+    "userActivity": "User Activity"
+  },
+  "pieChart": {
+    "title": "Browser Usage!",
+    "visitors": "Visitors",
+    "chrome": "Chrome",
+    "safari": "Safari",
+    "firefox": "Firefox",
+    "edge": "Edge",
+    "other": "Other",
+    "trendingUp": "Trending up by 5.2% this month",
+    "showingTotal": "Showing total visitors for the last 6 months"
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "hello": "Përshëndetje",
+  "save": "Ruaj",
+  "cancel": "Anulo",
+  "auth": {
+    "login": "Hyr",
+    "logout": "Del"
+  },
+  "nav": {
+    "dashboard": "Paneli",
+    "users": "Përdoruesit",
+    "toggleTheme": "Ndrysho ngjyrën"
+  },
+  "sidebar": {
+    "brand": "Leoni Dev",
+    "application": "Aplikacioni",
+    "projects": "Projektet",
+    "nestedItems": "Nested Items",
+    "collapsableGroup": "Collapsable Group",
+    "addProject": "Shto Projekt",
+    "seeAllProjects": "Shiko të Gjitha Projektet",
+    "addAProject": "Shto një Projekt",
+    "addCategory": "Shto Kategori"
+  },
+  "menu": {
+    "home": "Faqja Kryesore",
+    "users": "Përdoruesit",
+    "inbox": "Inbox",
+    "calendar": "Kalendari",
+    "search": "Kërko",
+    "settings": "Settings",
+    "myAccount": "Llogaria Ime",
+    "profile": "Profili",
+    "logOut": "Dil",
+    "account": "Llogaria",
+    "signOut": "Dil"
+  },
+  "theme": {
+    "light": "E Ndritshme",
+    "dark": "E Errët",
+    "system": "Sipas Sistemit"
+  },
+  "dashboard": {
+    "latestTransactions": "Transaksionet e fundit",
+    "popularContent": "Përmbajtja më popullore",
+    "todoList": "Lista e Detyrave",
+    "totalRevenue": "Të ardhurat totale!",
+    "pickADate": "Zgjidh një datë",
+    "totalVisitors": "Vizitorët Totalë!",
+    "browserUsage": "Përdorimi i Browserit!",
+    "trendingBrowser": "Është rritur me 5.2% këtë muaj",
+    "showingTotal": "Duke shfaqur vizitorët totalë për 6 muajt e fundit"
+  },
+  "chart": {
+    "desktop": "Desktop",
+    "mobile": "Celular"
+  },
+  "form": {
+    "editUser": "Ndrysho Përdoruesin",
+    "username": "Emri i përdoruesit",
+    "email": "Email",
+    "phone": "Telefoni",
+    "location": "Vendndodhja",
+    "role": "Roli",
+    "saveChanges": "Ruaj Ndryshimet",
+    "admin": "Admin",
+    "user": "Përdorues",
+    "onlyVerifiedUsersCanBeAdmin": "Vetëm përdoruesit e verifikuar mund të jenë admin.",
+    "invalidEmail": "Adresa e email-it është e pavlefshme!"
+  },
+  "language": {
+    "english": "Anglisht",
+    "albanian": "Shqip",
+    "switchLanguage": "Ndrysho Gjuhën"
+  },
+  "users": {
+    "title": "Përdoruesit",
+    "description": "Menaxho dhe shiko të gjithë përdoruesit në sistem",
+    "addUser": "Shto Përdorues",
+    "totalUsers": "Totali i Përdoruesve",
+    "activeUsers": "Përdoruesit Aktiv",
+    "admins": "Administratorët",
+    "allUsers": "Të gjithë Përdoruesit",
+    "showing": "Duke shfaqur",
+    "to": "deri",
+    "of": "nga",
+    "usersText": "përdorues",
+    "user": "Përdoruesi",
+    "contact": "Kontakti",
+    "location": "Vendndodhja",
+    "role": "Roli",
+    "status": "Statusi",
+    "actions": "Veprimet",
+    "viewProfile": "Shiko Profilin"
+  },
+  "profile": {
+    "dashboard": "Paneli",
+    "users": "Përdoruesit",
+    "userBadges": "User Badges",
+    "verifiedUser": "Përdorues i Verifikuar",
+    "verifiedDesc": "Ky përdorues është verifikuar nga admini",
+    "admin": "Admin",
+    "adminDesc": "Përdoruesit admin kanë qasje në të gjitha veçoritë dhe mund të menaxhojnë përdoruesit.",
+    "awarded": "I Shpërblyer",
+    "awardedDesc": "Ky përdorues është shpërblyer për kontributet e tij.",
+    "popular": "Popullor",
+    "popularDesc": "Ky përdorues ka qenë popullor në komunitet.",
+    "userInfo": "Informacioni i Përdoruesit",
+    "editUser": "Ndrysho të dhënat e Përdoruesit",
+    "completion": "Plotësimi i profilit",
+    "username": "Emri i përdoruesit:",
+    "email": "Emaili:",
+    "phone": "Telefoni:",
+    "location": "Vendndodhja:",
+    "roleLabel": "Roli:",
+    "joinedOn": "Bashkuar më",
+    "recentTransactions": "Transaksionet e Fundit",
+    "userActivity": "Aktiviteti i Përdoruesit"
+  },
+  "pieChart": {
+    "title": "Përdorimi i Shfletuesit!",
+    "visitors": "Vizitorë",
+    "chrome": "Chrome",
+    "safari": "Safari",
+    "firefox": "Firefox",
+    "edge": "Edge",
+    "other": "Tjetër",
+    "trendingUp": "Rritje me 5.2% këtë muaj",
+    "showingTotal": "Duke shfaqur vizitorët totalë për 6 muajt e fundit"
+  }
+}
