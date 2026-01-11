@@ -10,7 +10,6 @@ import {
   ChevronUp,
   Plus,
   Projector,
-  ChevronDown,
   Users,
 } from "lucide-react";
 import {
@@ -18,7 +17,6 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarGroupAction,
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
@@ -38,11 +36,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "./ui/collapsible";
+
 import { useTranslations } from "next-intl";
 
 const AppSidebar = () => {
@@ -124,67 +118,6 @@ const AppSidebar = () => {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        {/* Menyt per Projects */}
-        <SidebarGroup>
-          <SidebarGroupLabel>{t("sidebar.projects")}</SidebarGroupLabel>
-          <SidebarGroupAction>
-            <Plus /> <span className="sr-only">{t("sidebar.addProject")}</span>
-          </SidebarGroupAction>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/#">
-                    <Projector />
-                    {t("sidebar.seeAllProjects")}
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <Link href="/#">
-                    <Plus />
-                    {t("sidebar.addAProject")}
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        {/* Sidebari Collapsable */}
-        <Collapsible defaultOpen className="group/collapsible">
-          <SidebarGroup>
-            <SidebarGroupLabel asChild>
-              <CollapsibleTrigger>
-                {t("sidebar.collapsableGroup")}
-                <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
-              </CollapsibleTrigger>
-            </SidebarGroupLabel>
-            <CollapsibleContent>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild>
-                      <Link href="/#">
-                        <Projector />
-                        {t("sidebar.seeAllProjects")}
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                  <SidebarMenuItem>
-                    <SidebarMenuButton asChild>
-                      <Link href="/#">
-                        <Plus />
-                        {t("sidebar.addAProject")}
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </CollapsibleContent>
-          </SidebarGroup>
-        </Collapsible>
 
         {/* Nested menus */}
         <SidebarGroup>
@@ -207,18 +140,6 @@ const AppSidebar = () => {
                       <Link href="/#">
                         <Plus />
                         {t("sidebar.addProject")}
-                      </Link>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuItem>
-                </SidebarMenuSub>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuSub>
-                  <SidebarMenuItem>
-                    <SidebarMenuSubButton asChild>
-                      <Link href="/#">
-                        <Plus />
-                        {t("sidebar.addCategory")}
                       </Link>
                     </SidebarMenuSubButton>
                   </SidebarMenuItem>
