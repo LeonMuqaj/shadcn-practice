@@ -90,7 +90,7 @@ const AppSidebar = () => {
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <Link href="/">
-                <Image src="/favicon.ico" alt="logo" width={20} height={20} />
+                <Image src="/favicon.svg" alt="logo" width={20} height={20} />
                 <span>{t("sidebar.brand")}</span>
               </Link>
             </SidebarMenuButton>
