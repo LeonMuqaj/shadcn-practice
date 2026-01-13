@@ -30,38 +30,23 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Mail, MapPin, Phone, UserPlus } from "lucide-react";
-
-// Mock user data - replace with your actual data source
-const generateUsers = () => {
-  const users = [];
-  for (let i = 1; i <= 50; i++) {
-    users.push({
-      id: i,
-      username: `user${i}`,
-      name: `User ${i}`,
-      email: `user${i}@example.com`,
-      phone: `+1 (555) ${String(i).padStart(3, "0")}-${String(i * 10).padStart(
-        4,
-        "0"
-      )}`,
-      location: ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix"][
-        i % 5
-      ],
-      role: i % 3 === 0 ? "Admin" : i % 2 === 0 ? "Editor" : "User",
-      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${i}`,
-      status: i % 4 === 0 ? "Inactive" : "Active",
-    });
-  }
-  return users;
-};
+import { Mail, MapPin, Phone, UserPlus, Trash2 } from "lucide-react";
+import { useUsersStore, User } from "@/store/useUsersStore";
+import AddUserDialog from "./AddUserDialog";
+import DeleteUserDialog from "./DeleteUserDialog";
 
 const USERS_PER_PAGE = 10;
 
 const UsersPage = () => {
   const t = useTranslations();
   const [currentPage, setCurrentPage] = useState(1);
-  const allUsers = generateUsers();
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState<User | null>(null);
+
+  const allUsers = useUsersStore((state) => state.users);
+  const addUser = useUsersStore((state) => state.addUser);
+  const deleteUser = useUsersStore((state) => state.deleteUser);
 
   const totalPages = Math.ceil(allUsers.length / USERS_PER_PAGE);
   const startIndex = (currentPage - 1) * USERS_PER_PAGE;
@@ -108,6 +93,37 @@ const UsersPage = () => {
     return pages;
   };
 
+  const handleAddUser = (userData: {
+    name: string;
+    email: string;
+    phone: string;
+    location: string;
+    role: string;
+  }) => {
+    const newUser: User = {
+      id: allUsers.length > 0 ? Math.max(...allUsers.map((u) => u.id)) + 1 : 1,
+      username: userData.name.toLowerCase().replace(/\s+/g, ""),
+      name: userData.name,
+      email: userData.email,
+      phone: userData.phone,
+      location: userData.location,
+      role: userData.role,
+      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${Date.now()}`,
+      status: "Active",
+    };
+    addUser(newUser);
+  };
+
+  const handleDeleteClick = (user: User) => {
+    setUserToDelete(user);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const handleConfirmDelete = (username: string) => {
+    deleteUser(username);
+    setUserToDelete(null);
+  };
+
   return (
     <div className="p-6 space-y-6">
       {/* Header */}
@@ -116,7 +132,7 @@ const UsersPage = () => {
           <h1 className="text-3xl font-bold">{t("users.title")}</h1>
           <p className="text-muted-foreground mt-1">{t("users.description")}</p>
         </div>
-        <Button>
+        <Button onClick={() => setIsAddDialogOpen(true)}>
           <UserPlus className="mr-2 h-4 w-4" />
           {t("users.addUser")}
         </Button>
@@ -240,11 +256,21 @@ const UsersPage = () => {
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right">
-                    <Button variant="ghost" size="sm" asChild>
-                      <Link href={`/users/${user.username}`}>
-                        {t("users.viewProfile")}
-                      </Link>
-                    </Button>
+                    <div className="flex items-center justify-end gap-2">
+                      <Button variant="ghost" size="sm" asChild>
+                        <Link href={`/users/${user.username}`}>
+                          {t("users.viewProfile")}
+                        </Link>
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleDeleteClick(user)}
+                        className="text-red-500 hover:text-red-700 hover:bg-red-100"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
@@ -302,6 +328,24 @@ const UsersPage = () => {
           </div>
         </CardContent>
       </Card>
+
+      {/* Add User Dialog */}
+      <AddUserDialog
+        open={isAddDialogOpen}
+        onClose={() => setIsAddDialogOpen(false)}
+        onAddUser={handleAddUser}
+      />
+
+      {/* Delete User Dialog */}
+      <DeleteUserDialog
+        open={isDeleteDialogOpen}
+        onClose={() => {
+          setIsDeleteDialogOpen(false);
+          setUserToDelete(null);
+        }}
+        user={userToDelete}
+        onConfirmDelete={handleConfirmDelete}
+      />
     </div>
   );
 };

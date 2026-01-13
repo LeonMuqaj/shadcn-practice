@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 import CardList from "../../components/CardList";
 import { Badge } from "../../components/ui/badge";
 import {
@@ -18,7 +20,6 @@ import {
 } from "../../components/ui/hover-card";
 import { Progress } from "../../components/ui/progress";
 import { BadgeCheck, Candy, Citrus, Shield } from "lucide-react";
-import { Sheet, SheetTrigger } from "../../components/ui/sheet";
 import { Button } from "../../components/ui/button";
 import EditUser from "../../components/EditUser";
 import {
@@ -27,9 +28,35 @@ import {
   AvatarImage,
 } from "../../components/ui/avatar";
 import AppLineChart from "../../components/AppLineChart";
+import { useUsersStore } from "@/store/useUsersStore";
 
 const SingleUserPage = () => {
   const t = useTranslations();
+  const params = useParams();
+  const username = params.username as string;
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+
+  const users = useUsersStore((state) => state.users);
+  const user = users.find((u) => u.username === username);
+
+  // Show not found message if user doesn't exist
+  if (!user) {
+    return (
+      <div className="p-6">
+        <h1 className="text-2xl font-bold">User not found</h1>
+        <p className="text-muted-foreground mt-2">
+          The user with username &quot;{username}&quot; does not exist.
+        </p>
+      </div>
+    );
+  }
+
+  // Get user initials for avatar fallback
+  const initials = user.name
+    .split(" ")
+    .map((n) => n[0])
+    .join("");
+
   return (
     <div className="">
       <Breadcrumb>
@@ -43,7 +70,7 @@ const SingleUserPage = () => {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>John Doe</BreadcrumbPage>
+            <BreadcrumbPage>{user.name}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -124,12 +151,9 @@ const SingleUserPage = () => {
           <div className="bg-primary-foreground p-4 rounded-lg">
             <div className="flex items-center justify-between">
               <h1 className="text-xl font-semibold">{t("profile.userInfo")}</h1>
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button>{t("profile.editUser")}</Button>
-                </SheetTrigger>
-                <EditUser />
-              </Sheet>
+              <Button onClick={() => setIsEditDialogOpen(true)}>
+                {t("profile.editUser")}
+              </Button>
             </div>
             <div className="space-y-4 mt-4">
               <div className="flex flex-col gap-2 mb-8">
@@ -140,23 +164,23 @@ const SingleUserPage = () => {
               </div>
               <div className="flex items-center gap-2">
                 <span className="font-bold">{t("profile.username")}</span>
-                <span>john.doe</span>
+                <span>{user.username}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="font-bold">{t("profile.email")}</span>
-                <span>john.doe@gmail.com</span>
+                <span>{user.email}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="font-bold">{t("profile.phone")}</span>
-                <span>+38344123456</span>
+                <span>{user.phone}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="font-bold">{t("profile.location")}</span>
-                <span>Gjakov </span>
+                <span>{user.location}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="font-bold">{t("profile.roleLabel")}</span>
-                <Badge>Admin</Badge>
+                <Badge>{user.role}</Badge>
               </div>
             </div>
             <p className="text-sm text-muted-foreground mt-4">
@@ -176,10 +200,10 @@ const SingleUserPage = () => {
           <div className="bg-primary-foreground p-4 rounded-lg space-y-2">
             <div className="flex items-center gap-2">
               <Avatar className="size-12">
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>JD</AvatarFallback>
+                <AvatarImage src={user.avatar} />
+                <AvatarFallback>{initials}</AvatarFallback>
               </Avatar>
-              <h1 className="text-xl font-semibold">John Doe</h1>
+              <h1 className="text-xl font-semibold">{user.name}</h1>
             </div>
             <p className="text-sm text-muted-foreground">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa
@@ -198,6 +222,13 @@ const SingleUserPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Edit User Dialog */}
+      <EditUser
+        user={user}
+        open={isEditDialogOpen}
+        onClose={() => setIsEditDialogOpen(false)}
+      />
     </div>
   );
 };

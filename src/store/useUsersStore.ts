@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { generateUsers } from '@/users/usersData';
+import { generateUsers } from '@/app/[locale]/users/usersData';
 
 export interface User {
   id: number;

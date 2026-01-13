@@ -11,6 +11,7 @@ import {
   Plus,
   Projector,
   Users,
+  CreditCard,
 } from "lucide-react";
 import {
   Sidebar,
@@ -55,13 +56,18 @@ const AppSidebar = () => {
     },
     {
       title: t("menu.inbox"),
-      url: "#",
+      url: "/inbox",
       icon: Inbox,
     },
     {
       title: t("menu.calendar"),
-      url: "#",
+      url: "/calendar",
       icon: Calendar,
+    },
+    {
+      title: t("menu.payments"),
+      url: "/payments",
+      icon: CreditCard,
     },
     {
       title: t("menu.search"),

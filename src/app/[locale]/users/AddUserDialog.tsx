@@ -6,7 +6,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "./ui/dialog";
+} from "../components/ui/dialog";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -18,69 +18,49 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+} from "../components/ui/form";
+import { Input } from "../components/ui/input";
+import { Button } from "../components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
-import { User, useUsersStore } from "@/store/useUsersStore";
-import { useEffect } from "react";
-
-interface EditUserProps {
-  user: User;
-  open: boolean;
-  onClose: () => void;
-}
+} from "../components/ui/select";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
-  username: z.string().min(2).max(50),
   email: z.string().email({ message: "Invalid email address!" }),
-  phone: z.string().min(10).max(15),
-  location: z.string().min(2),
-  role: z.enum(["Admin", "Editor", "User", "admin", "user"]),
+  phone: z.string().min(10, "Phone must be at least 10 characters"),
+  location: z.string().min(2, "Location is required"),
+  role: z.enum(["Admin", "Editor", "User"]),
 });
 
-const EditUser = ({ user, open, onClose }: EditUserProps) => {
-  const updateUser = useUsersStore((state) => state.updateUser);
+interface AddUserDialogProps {
+  open: boolean;
+  onClose: () => void;
+  onAddUser?: (user: z.infer<typeof formSchema>) => void;
+}
 
+const AddUserDialog = ({ open, onClose, onAddUser }: AddUserDialogProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: user.name,
-      username: user.username,
-      email: user.email,
-      phone: user.phone,
-      location: user.location,
-      role: user.role as "Admin" | "Editor" | "User" | "admin" | "user",
+      name: "",
+      email: "",
+      phone: "",
+      location: "",
+      role: "User",
     },
   });
 
-  // Reset form when user changes
-  useEffect(() => {
-    form.reset({
-      name: user.name,
-      username: user.username,
-      email: user.email,
-      phone: user.phone,
-      location: user.location,
-      role: user.role as "Admin" | "Editor" | "User" | "admin" | "user",
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
-
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    // Sanitize username: lowercase and remove spaces
-    const sanitizedValues = {
-      ...values,
-      username: values.username.toLowerCase().replace(/\s+/g, ""),
-    };
-    updateUser(user.username, sanitizedValues);
+    console.log("New user:", values);
+    if (onAddUser) {
+      onAddUser(values);
+    }
+    form.reset();
     onClose();
   };
 
@@ -88,9 +68,9 @@ const EditUser = ({ user, open, onClose }: EditUserProps) => {
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit User</DialogTitle>
+          <DialogTitle>Add New User</DialogTitle>
           <DialogDescription>
-            Make changes to the user profile. Click save when you&apos;re done.
+            Fill in the details to create a new user account.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -102,20 +82,7 @@ const EditUser = ({ user, open, onClose }: EditUserProps) => {
                 <FormItem>
                   <FormLabel>Full Name</FormLabel>
                   <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
+                    <Input placeholder="John Doe" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -128,7 +95,7 @@ const EditUser = ({ user, open, onClose }: EditUserProps) => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input placeholder="john@example.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -141,7 +108,7 @@ const EditUser = ({ user, open, onClose }: EditUserProps) => {
                 <FormItem>
                   <FormLabel>Phone</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input placeholder="+1 (555) 000-0000" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -154,7 +121,7 @@ const EditUser = ({ user, open, onClose }: EditUserProps) => {
                 <FormItem>
                   <FormLabel>Location</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input placeholder="New York" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -192,7 +159,7 @@ const EditUser = ({ user, open, onClose }: EditUserProps) => {
               <Button type="button" variant="outline" onClick={onClose}>
                 Cancel
               </Button>
-              <Button type="submit">Save Changes</Button>
+              <Button type="submit">Add User</Button>
             </div>
           </form>
         </Form>
@@ -201,4 +168,4 @@ const EditUser = ({ user, open, onClose }: EditUserProps) => {
   );
 };
 
-export default EditUser;
+export default AddUserDialog;
