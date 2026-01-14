@@ -9,6 +9,7 @@ import { cookies } from "next/headers";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -66,6 +67,7 @@ export default async function RootLayout({
             </SidebarProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );
